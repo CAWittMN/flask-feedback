@@ -16,6 +16,10 @@ class User(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
 
+    @classmethod
+    def name_dict(cls, name):
+        split_name = name.split()
+
 
 def connect_db(app):
     db.init_app(app)

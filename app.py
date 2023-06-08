@@ -1,6 +1,8 @@
-from flask import Flask, request, redirect, render_template, jsonify
+from flask import Flask, request, redirect, render_template, jsonify, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import User, db, connect_db
+from forms import RegisterForm, LoginForm
+from wtforms.validators import ValidationError
 
 
 app = Flask(__name__)
@@ -24,3 +26,19 @@ with app.app_context():
 def index():
     """home page"""
     return render_template("base.html")
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """show register form and create a new user account"""
+    if "current_user" in session:
+        return redirect(f'users/{session["current_user"]}')
+
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        name = form.name.data
+        if len(name.split()) > 2:
+            ValidationError(message="Please enter first and last name only.")

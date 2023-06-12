@@ -4,6 +4,7 @@ click
 Flask
 Flask-Bcrypt
 Flask-SQLAlchemy
+Flask-Debugtoolbar
 Flask-WTF
 greenlet
 itsdangerous

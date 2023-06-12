@@ -8,7 +8,7 @@ db = SQLAlchemy()
 class User(db.Model):
     """User model"""
 
-    __tablename__ = "users"
+    __tablename__ = "ffb_users"
 
     username = db.Column(db.String(20), primary_key=True, unique=True)
     password = db.Column(db.String, nullable=False)
@@ -56,7 +56,7 @@ class User(db.Model):
 class Feedback(db.Model):
     """feedback model"""
 
-    __tablename__ = "feedback"
+    __tablename__ = "ffb_feedback"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)

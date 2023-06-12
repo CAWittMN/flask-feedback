@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, TextAreaField, EmailField
 from wtforms.validators import InputRequired, Email, ValidationError, Length
 
 
@@ -24,12 +24,11 @@ class RegisterForm(FlaskForm):
             check_name,
         ],
     )
-    email = StringField(
+    email = EmailField(
         "Email",
         validators=[
             Length(max=30, message="Email is too long"),
             InputRequired(message="Please enter a email address."),
-            Email(message="Not a valid email address."),
         ],
     )
     password = PasswordField(
@@ -46,3 +45,12 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])
     password = StringField("Password", validators=[InputRequired()])
+
+
+class FeedbackForm(FlaskForm):
+    title = StringField("Title", validators=[InputRequired(), Length(max=100)])
+    content = TextAreaField("Content", validators=[InputRequired()])
+
+
+class DeleteForm(FlaskForm):
+    """delete form"""
